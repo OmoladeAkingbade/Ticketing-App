@@ -85,6 +85,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
           token: generateToken(user.email),
           data: user,
         });
+
       } catch (err) {
         res.status(500).json({
           status: "error",
@@ -92,4 +93,49 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
         });
       }
     };
+
+    export const protectRoute = async (
+      req: Request,
+      res: Response,
+      next: NextFunction
+    ) => {
+      let token: string | undefined;
+    
+      if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer")
+      ) {
+        token = req.headers.authorization.split(" ")[1];
+      }
+    
+      if (!token) {
+        return res.status(401).json({
+          status: "fail",
+          message: "please provide auth token",
+        });
+      }
+    
+      try {
+        const decodedToken: any = jwt.verify(
+          token as string,
+          process.env.JWT_SECRET as string
+        );
+        const user = await User.findOne({ email: decodedToken.email });
+    
+        // console.log(user, "***");
+    
+        if (user) {
+          req.user = user;
+        }
+        next();
+      } catch (err) {
+        console.log(err);
+    
+        res.status(401).json({
+          status: "fail",
+          message: "invalid auth token",
+        });
+      }
+    };
+    
     

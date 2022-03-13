@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.signup = void 0;
+exports.protectRoute = exports.login = exports.signup = void 0;
 const userModels_1 = __importDefault(require("../model/userModels"));
 const validation_1 = require("../validation/validation");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
@@ -96,3 +96,33 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.login = login;
+const protectRoute = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    let token;
+    if (req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer")) {
+        token = req.headers.authorization.split(" ")[1];
+    }
+    if (!token) {
+        return res.status(401).json({
+            status: "fail",
+            message: "please provide auth token",
+        });
+    }
+    try {
+        const decodedToken = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        const user = yield userModels_1.default.findOne({ email: decodedToken.email });
+        // console.log(user, "***");
+        if (user) {
+            req.user = user;
+        }
+        next();
+    }
+    catch (err) {
+        console.log(err);
+        res.status(401).json({
+            status: "fail",
+            message: "invalid auth token",
+        });
+    }
+});
+exports.protectRoute = protectRoute;
