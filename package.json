@@ -8,7 +8,8 @@
     "start-dev": "nodemon dist/server.js",
     "test": "jest",
     "compile": "yarn tsc",
-    "compile:watch": "yarn tsc -w"
+    "compile:watch": "yarn tsc -w",
+    "prod": "NODE_ENV=production nodemon dist/server"
   },
   "repository": "https://github.com/OmoladeAkingbade/Ticketing-App.git",
   "author": "OmoladeAkingbade <lademercy93@gmail.com>",
@@ -20,6 +21,7 @@
     "express": "^4.17.3",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^8.4.0",
     "mongoose": "^6.2.6",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
