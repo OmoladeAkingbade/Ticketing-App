@@ -12,9 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSupportRequest = void 0;
+exports.getAllPreviousRequests = exports.createSupportRequest = void 0;
 const supportRequestModel_1 = __importDefault(require("../model/supportRequestModel"));
 const validation_1 = require("../validations/validation");
+const apiFeatures_1 = __importDefault(require("../utils/apiFeatures"));
 const createSupportRequest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
@@ -41,3 +42,23 @@ const createSupportRequest = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.createSupportRequest = createSupportRequest;
+//  get all recipes that a user has created
+const getAllPreviousRequests = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { _id } = req.user;
+        const query = supportRequestModel_1.default.find({ user: _id });
+        const features = new apiFeatures_1.default(query, req.query).paginate();
+        const request = yield features.query;
+        res.status(200).json({
+            results: request.length,
+            status: "success",
+            data: {
+                request,
+            },
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+});
+exports.getAllPreviousRequests = getAllPreviousRequests;

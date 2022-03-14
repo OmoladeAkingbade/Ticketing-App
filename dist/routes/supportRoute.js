@@ -9,6 +9,9 @@ const authController_1 = require("../controllers/authController");
 const requestController_1 = require("../controllers/requestController");
 const router = express_1.default.Router();
 router
-    .route('/request')
+    .route('/')
     .post(authController_1.protectRoute, requestController_1.createSupportRequest);
+router
+    .route('/requests') //view previous request
+    .get(authController_1.protectRoute, requestController_1.getAllPreviousRequests);
 exports.default = router;

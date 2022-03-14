@@ -1,7 +1,7 @@
 ``
 import express, { Application, Request, Response, NextFunction } from 'express';
 import { protectRoute } from '../controllers/authController';
-import { createSupportRequest } from '../controllers/requestController';
+import { createSupportRequest, getAllPreviousRequests } from '../controllers/requestController';
 
 
 const router = express.Router();
@@ -9,7 +9,12 @@ const router = express.Router();
 
 
 router
-.route('/request')
+.route('/')
 .post(protectRoute, createSupportRequest)
+
+router
+    .route('/requests') //view previous request
+    .get(protectRoute, getAllPreviousRequests)
+
 
 export default router

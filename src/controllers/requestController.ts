@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { Request, Response, NextFunction } from 'express';
 import supportRequest from '../model/supportRequestModel';
 import { validateSupportRequest } from '../validations/validation';
+import APIfeatures from '../utils/apiFeatures';
 
 export const createSupportRequest = async (req: Request, res: Response) => {
   try {
@@ -30,3 +31,27 @@ export const createSupportRequest = async (req: Request, res: Response) => {
     res.status(400).send('an error occured');
   }
 };
+
+//  get all recipes that a user has created
+export const getAllPreviousRequests = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { _id } = req.user!;
+      const query = supportRequest.find({ user: _id });
+      const features = new APIfeatures(query, req.query).paginate();
+      const request = await features.query;
+  
+      res.status(200).json({
+        results: request.length,
+        status: "success",
+        data: {
+          request,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
