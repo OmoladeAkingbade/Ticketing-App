@@ -14,4 +14,7 @@ router
 router
     .route('/requests') //view previous request
     .get(authController_1.protectRoute, requestController_1.getAllPreviousRequests);
+router
+    .route('/requests/:requestId')
+    .get(authController_1.protectRoute, requestController_1.getOneRequest);
 exports.default = router;

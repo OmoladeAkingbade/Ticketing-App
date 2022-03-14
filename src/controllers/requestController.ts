@@ -32,7 +32,7 @@ export const createSupportRequest = async (req: Request, res: Response) => {
   }
 };
 
-//  get all recipes that a user has created
+//  get all requests that a user has created
 export const getAllPreviousRequests = async (
     req: Request,
     res: Response,
@@ -46,6 +46,28 @@ export const getAllPreviousRequests = async (
   
       res.status(200).json({
         results: request.length,
+        status: "success",
+        data: {
+          request,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+//   get one request from a user's  previous requests
+  export const getOneRequest = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { requestId } = req.params;
+      const { _id } = req.user!;
+     
+      const request = await supportRequest.findOne({ user: _id, _id: requestId });
+      res.status(200).json({
         status: "success",
         data: {
           request,
