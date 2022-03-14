@@ -16,5 +16,6 @@ router
     .get(authController_1.protectRoute, requestController_1.getAllPreviousRequests);
 router
     .route('/requests/:requestId')
-    .get(authController_1.protectRoute, requestController_1.getOneRequest);
+    .get(authController_1.protectRoute, requestController_1.getOneRequest)
+    .put(authController_1.protectRoute, requestController_1.updateRequest);
 exports.default = router;

@@ -19,7 +19,7 @@ const getAllCustomers = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
         const customers = yield userModels_1.default.find();
         res.status(200).json({
             results: customers.length,
-            status: "success",
+            status: 'success',
             data: {
                 customers,
             },

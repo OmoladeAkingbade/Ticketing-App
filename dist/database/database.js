@@ -11,9 +11,7 @@ const connectDB = () => {
     try {
         const DB = (_a = process.env.DATABASE_URL) === null || _a === void 0 ? void 0 : _a.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
         // Connect to MongoDB
-        mongoose_1.default
-            .connect(DB)
-            .then(() => {
+        mongoose_1.default.connect(DB).then(() => {
             console.log(`DB connection successful....`);
         });
     }
@@ -24,7 +22,7 @@ const connectDB = () => {
 exports.connectDB = connectDB;
 const connectMockDB = () => {
     try {
-        mongodb_memory_server_1.MongoMemoryServer.create().then((mongo) => {
+        mongodb_memory_server_1.MongoMemoryServer.create().then(mongo => {
             const uri = mongo.getUri();
             mongoose_1.default.connect(uri).then(() => {
                 console.log(`Mock DB connected...`);

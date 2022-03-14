@@ -9,14 +9,14 @@ const commentSchema = new mongoose_1.default.Schema({
         type: String,
         trim: true,
     },
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'User',
-    // },
-    userId: {
-        type: String,
-        required: true
+    user: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: 'User',
     },
+    // userId: {
+    //   type: String,
+    //   required: true,
+    // },
 }, { timestamps: true });
 const comments = mongoose_1.default.model('supportRequest', commentSchema);
 exports.default = comments;
