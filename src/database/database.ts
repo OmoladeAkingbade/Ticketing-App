@@ -29,10 +29,11 @@ export const  connectDB = () => {
     try {
       MongoMemoryServer.create().then((mongo) => {
         const uri = mongo.getUri();
-  
+
         mongoose.connect(uri).then(() => {
           console.log(`Mock DB connected...`);
         });
+
       });
     } catch (error) {
       console.log(error);

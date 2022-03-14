@@ -4,21 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const morgan_1 = __importDefault(require("morgan"));
 const cors_1 = __importDefault(require("cors"));
-const db_1 = require("./database/db");
 const dotenv_1 = __importDefault(require("dotenv"));
+const userRoute_1 = __importDefault(require("./routes/userRoute"));
+const supportRoute_1 = __importDefault(require("./routes/supportRoute"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 // MIDDLEWARES
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-if (process.env.NODE_ENV === "test") {
-    console.log(process.env.NODE_ENV, '***');
-    (0, db_1.connectMockDB)();
-}
-else {
-    (0, db_1.connectDB)();
-}
-// app.use('/api/v1/users/', userRouter);
-// app.use('/api/v1/support/supportRouter');
+app.use((0, morgan_1.default)('dev'));
+app.use('/api/v1/users/', userRoute_1.default);
+app.use('/api/v1/support/', supportRoute_1.default);
 exports.default = app;

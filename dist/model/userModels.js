@@ -19,34 +19,39 @@ const userSchema = new mongoose_1.default.Schema({
     email: {
         type: String,
         unique: true,
-        required: [true, "A user must have an email"],
+        required: [true, 'A user must have an email'],
         lowercase: true,
-        validate: [validator_1.default.isEmail, "A user must have a valid email"],
+        validate: [validator_1.default.isEmail, 'A user must have a valid email'],
+    },
+    user: {
+        type: String,
+        enum: ['admin', 'customer', 'support'],
+        default: 'customer',
     },
     password: {
         type: String,
-        required: [true, "A user must have a password"],
+        required: [true, 'A user must have a password'],
         trim: true,
         select: false,
-        maxlength: [20, "A password must have less or equal to 20 characters"],
+        maxlength: [20, 'A password must have less or equal to 20 characters'],
         minlength: [
             10,
-            "A password name must have more or equal to 10 characters",
+            'A password name must have more or equal to 10 characters',
         ],
     },
     fullname: {
         type: String,
-        required: [true, "A user must have a fullname"],
+        required: [true, 'A user must have a fullname'],
         trim: true,
     },
 }, { timestamps: true });
-userSchema.pre("save", function (next) {
+userSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (this.password && this.isModified("password")) {
+        if (this.password && this.isModified('password')) {
             this.password = yield bcryptjs_1.default.hash(this.password, 10);
         }
         next();
     });
 });
-const User = mongoose_1.default.model("User", userSchema);
+const User = mongoose_1.default.model('User', userSchema);
 exports.default = User;

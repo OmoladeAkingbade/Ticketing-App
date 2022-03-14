@@ -5,4 +5,5 @@ export interface IUser extends mongoose.Document {
     fullname: string;
     timestamps: boolean;
     email: string;
+    user: string;
   }

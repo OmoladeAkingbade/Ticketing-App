@@ -14,13 +14,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.protectRoute = exports.login = exports.signup = void 0;
 const userModels_1 = __importDefault(require("../model/userModels"));
-const validation_1 = require("../validation/validation");
+const validation_1 = require("../validations/validation");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const generateToken = (email) => {
     const token = jsonwebtoken_1.default.sign({ email }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
+    return token;
 };
 const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
