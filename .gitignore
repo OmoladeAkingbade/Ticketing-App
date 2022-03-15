@@ -1,5 +1,7 @@
 #build project
-dist/
+./dist
+dist
+
 
 # Object file
 *.o

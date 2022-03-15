@@ -4,6 +4,7 @@ import supportRequest from '../model/supportRequestModel';
 import { validateSupportRequest } from '../validations/validation';
 import APIfeatures from '../utils/apiFeatures';
 import { string } from 'joi';
+import fs from 'fs';
 
 export const createSupportRequest = async (req: Request, res: Response) => {
   try {
@@ -198,12 +199,37 @@ export const getResolvedStatus = async (
       statusUpdatedAt: { $gte: today },
     });
 
+    if (!resolvedRequests.length)
+      return res.status(404).json({ 
+        status: fail,
+        message: 'No data found' 
+      });
+
     console.log(resolvedRequests, '<<<<<<');
+
+    const fileName = `30-days-resolved-requests.csv`;
+
+    const file = fs.createWriteStream(`./public/${fileName}`);
+
+    file.write(
+      'statusId,title,description,status,userId,createdAt,statusUpdatedAt\n'
+    );
+
+    resolvedRequests.forEach(function (v) {
+      file.write(
+        `${v._id};${v.title};${v.description}/${v.status}/${v.user}${v.createdAt}${v.statusUpdatedAt};` +
+          '\n'
+      );
+    });
+
+    const url = req.protocol + '://' + req.get('host');
 
     res.status(201).json({
       status: 'success',
+      message: 'Resolved request file successcfully created',
       data: {
-        resolvedRequests,
+        // resolvedRequests,
+        link: `${url}/${fileName}`,
       },
     });
   } catch (err) {
@@ -214,20 +240,8 @@ export const getResolvedStatus = async (
   }
 };
 
-// if (!requests || resolvedRequests != 'resolved') {
-//   return res.status(400).json({
-//     status: 'fail',
-//     message: 'No request found',
-//   });
-// }
+/**
+ *
+ *
+ */
 
-// if (req.user?.user === 'customer') {
-//   return res.status(400).json({
-//     status: 'fail',
-//     message: 'only a support agent can process request',
-//   });
-// }
-
-// const requestStatus = await supportRequest.find({
-//   date: { $lte: 'today' },
-// });
