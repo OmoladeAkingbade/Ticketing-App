@@ -12,14 +12,22 @@ const supportRequestSchema = new mongoose_1.default.Schema({
     },
     description: {
         type: String,
-        required: [true, 'A request must have a description']
+        required: [true, 'A request must have a description'],
+    },
+    customerCanComment: {
+        type: Boolean,
+        default: false,
     },
     status: {
         type: String,
         enum: {
             values: ['resolved', 'pending'],
-            message: ["a request can either be pending or resolved"]
-        }
+            message: ['a request can either be pending or resolved'],
+        },
+        default: 'pending',
+    },
+    statusUpdatedAt: {
+        type: Date,
     },
     user: {
         type: mongoose_1.default.Schema.Types.ObjectId,

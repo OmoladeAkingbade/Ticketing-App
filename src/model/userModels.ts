@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema<IUser>(
     },
     user: {
       type: String,
+      required: [true, 'the type of user should be specified'],
       enum: ['admin', 'customer', 'support'],
       default: 'customer',
     },

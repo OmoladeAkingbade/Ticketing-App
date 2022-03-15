@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import supportRequest from '../model/supportRequestModel';
 import { validateSupportRequest } from '../validations/validation';
 import APIfeatures from '../utils/apiFeatures';
+import { string } from 'joi';
 
 export const createSupportRequest = async (req: Request, res: Response) => {
   try {
@@ -66,6 +67,8 @@ export const getOneRequest = async (
     const { requestId } = req.params;
     const { _id } = req.user!;
 
+    console.log(req.user);
+
     const request = await supportRequest.findOne({ user: _id, _id: requestId });
     res.status(200).json({
       status: 'success',
@@ -78,6 +81,7 @@ export const getOneRequest = async (
   }
 };
 
+// a user can update his/her previous request
 export const updateRequest = async (
   req: Request,
   res: Response,
@@ -115,3 +119,115 @@ export const updateRequest = async (
     });
   }
 };
+
+// support agent resolves a request and updates the status
+export const updateRequestStatus = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { _id } = req.user!;
+    const { requestId } = req.params;
+    const request = await supportRequest.find({
+      _id: req.params.requestId,
+    });
+
+    if (!request) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Request does not exist',
+      });
+    }
+
+    if (req.user?.user === 'customer') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'only a support agent can update request status',
+      });
+    }
+
+    const requestStatus = await supportRequest.findOneAndUpdate(
+      { _id: requestId },
+      { ...req.body, statusUpdatedAt: Date.now() },
+      {
+        new: true,
+        validators: true,
+      }
+    );
+    // if (requestStatus === null) {
+    //   return res.status(400).json({
+    //     status: 'fail',
+    //     message: 'request not created by current user or request not found',
+    //   });
+    // }
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        requestStatus,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+// get resolved requests by support agent in the last 30days
+
+export const getResolvedStatus = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { _id } = req.user!;
+    const { requestId } = req.params;
+
+    // const requests = await supportRequest.find();
+    let today = new Date();
+    today.setDate(today.getDate() - 30);
+
+    console.log(today);
+
+    const resolvedRequests = await supportRequest.find({
+      status: 'resolved',
+      statusUpdatedAt: { $gte: today },
+    });
+
+    console.log(resolvedRequests, '<<<<<<');
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        resolvedRequests,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+};
+
+// if (!requests || resolvedRequests != 'resolved') {
+//   return res.status(400).json({
+//     status: 'fail',
+//     message: 'No request found',
+//   });
+// }
+
+// if (req.user?.user === 'customer') {
+//   return res.status(400).json({
+//     status: 'fail',
+//     message: 'only a support agent can process request',
+//   });
+// }
+
+// const requestStatus = await supportRequest.find({
+//   date: { $lte: 'today' },
+// });

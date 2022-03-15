@@ -10,6 +10,7 @@ export const validateUserSignUp = Joi.object({
       .max(20)
       .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
     fullname: Joi.string().required().trim().min(1).max(50),
+    user: Joi.string()
   });
   
   export const validateUserLogin = Joi.object({
@@ -22,6 +23,14 @@ export const validateSupportRequest = Joi.object({
   title: Joi.string().required().trim(),
   description: Joi.string().required().trim(),
   status: Joi.string().trim(),
+  // userId: Joi.string().required(),
+  timestamps: Date
+});
+
+export const validateComment = Joi.object({
+  content: Joi.string().required().trim(),
+  user: Joi.string().required().trim(),
+  request: Joi.string().trim(),
   // userId: Joi.string().required(),
   timestamps: Date
 });

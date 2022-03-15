@@ -9,7 +9,7 @@ const router = express_1.default.Router();
 router
     .route('/signup')
     .post(authController_1.signup);
-router.
-    route('/login')
+router
+    .route('/login')
     .post(authController_1.login);
 exports.default = router;
