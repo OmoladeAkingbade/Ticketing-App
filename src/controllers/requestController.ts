@@ -187,9 +187,8 @@ export const getResolvedStatus = async (
 ) => {
   try {
     const { _id } = req.user!;
-    const { requestId } = req.params;
+    // const { requestId } = req.params;
 
-    // const requests = await supportRequest.find();
     let today = new Date();
     today.setDate(today.getDate() - 30);
 
@@ -225,7 +224,7 @@ export const getResolvedStatus = async (
 
     const url = req.protocol + '://' + req.get('host');
 
-    res.status(201).json({
+    res.status(200).json({
       status: 'success',
       message: 'Resolved request file successcfully created',
       data: {
