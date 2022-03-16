@@ -71,6 +71,13 @@ export const getOneRequest = async (
     console.log(req.user);
 
     const request = await supportRequest.findOne({ user: _id, _id: requestId });
+    
+    if (!request)
+    return res.status(404).json({
+      status: 'fail',
+      message: 'request does not exist',
+    });
+
     res.status(200).json({
       status: 'success',
       data: {

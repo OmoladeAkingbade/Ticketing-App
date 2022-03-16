@@ -95,6 +95,21 @@ describe("get all previous requests", () => {
     expect(response.body).toHaveProperty("data");
     expect(response.body.data).toHaveProperty("request");
     expect(Array.isArray(response.body.data.request)).toBe(true);
+     // expect(response.body.data.request.forEach((item: { status: string; }) => { return item.status} )).toBe('resolved' || 'pending');
+  });
+});
+
+// test get one previous request by a customer
+describe("get one request", () => {
+  it("it should get one request created by a customer", async () => {
+    const response = await request(app)
+      .get(`/api/v1/support/requests/${requestId}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("data");
+    expect(response.body.data).toHaveProperty("request");
+    expect(Array.isArray(response.body.data.request)).toBe(false);
   });
 });
 
