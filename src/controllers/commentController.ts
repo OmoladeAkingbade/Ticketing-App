@@ -59,17 +59,3 @@ export const createComment = async (req: Request, res: Response) => {
   }
 };
 
-// const user = await User.findById(req.user?._id);
-// const typeOfUser = user?.user;
-
-// const request = await supportRequest.findById(req.params.id);
-// this should be the request id the comment is being  created for. so you ref the request on the comment schema.
-
-// after which, check if there is a comment with that request id already existing.
-
-// if (typeOfUser != 'support') {
-//   res.status(403).json({
-//     status: 'fail',
-//     message: 'a support agent has to comment first',
-//   });
-// }

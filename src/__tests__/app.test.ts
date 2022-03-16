@@ -17,6 +17,7 @@ afterAll(async () => {
 });
 
 let token: string;
+let requestId: string;
 
 // test authentication(signup and login)
 describe('user authentication', () => {
@@ -54,3 +55,46 @@ describe('user authentication', () => {
     expect(response.body).toHaveProperty('token');
   });
 });
+
+
+// test create a support request
+describe("create request", () => {
+  it("it should create a support request for logged in users", async () => {
+    const supportRequest = {
+      title: "Travel Ticket",
+      description: "No date on ticket",
+    };
+
+    const response = await request(app)
+      .post("/api/v1/support")
+      .send(supportRequest)
+      .set("Authorization", `Bearer ${token}`);
+
+    // console.log(response.body);
+
+    requestId = response.body.data.newSupportRequest._id;
+
+    expect(response.status).toBe(201);
+    expect(response.body).toHaveProperty("message");
+    expect(response.body).toHaveProperty("data");
+    expect(response.body.data).toHaveProperty("newSupportRequest");
+    expect(response.body.data.newSupportRequest).toHaveProperty('customerCanComment');
+    expect(response.body.data.newSupportRequest.customerCanComment).toBeFalsy();
+  });
+});
+
+// test get all previous requests created  by a customer
+
+describe("get all previous requests", () => {
+  it("it should get all previous support request created by a user", async () => {
+    const response = await request(app)
+      .get("/api/v1/support/requests")
+      .set("Authorization", `Bearer ${token}`);
+      
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("data");
+    expect(response.body.data).toHaveProperty("request");
+    expect(Array.isArray(response.body.data.request)).toBe(true);
+  });
+});
+

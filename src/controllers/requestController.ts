@@ -156,12 +156,6 @@ export const updateRequestStatus = async (
         validators: true,
       }
     );
-    // if (requestStatus === null) {
-    //   return res.status(400).json({
-    //     status: 'fail',
-    //     message: 'request not created by current user or request not found',
-    //   });
-    // }
 
     res.status(201).json({
       status: 'success',
@@ -200,9 +194,9 @@ export const getResolvedStatus = async (
     });
 
     if (!resolvedRequests.length)
-      return res.status(404).json({ 
+      return res.status(404).json({
         status: fail,
-        message: 'No data found' 
+        message: 'No data found',
       });
 
     console.log(resolvedRequests, '<<<<<<');
@@ -244,4 +238,3 @@ export const getResolvedStatus = async (
  *
  *
  */
-
