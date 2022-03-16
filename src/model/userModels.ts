@@ -1,4 +1,3 @@
-import express from 'express';
 import mongoose from 'mongoose';
 import { IUser } from '../utils/interface';
 import validator from 'validator';

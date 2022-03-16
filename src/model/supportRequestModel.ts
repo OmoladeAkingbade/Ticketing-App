@@ -1,6 +1,12 @@
-import mongoose from 'mongoose';
+/**
+ * summary - This is the support reuest model file.
+ * The file contains the support reuest schema that defines the structure and contents of the support request data.
+ */
 
-const supportRequestSchema = new mongoose.Schema(
+import mongoose from 'mongoose';
+import { ISupportRequest } from '../utils/interface';
+
+const supportRequestSchema = new mongoose.Schema<ISupportRequest>(
   {
     title: {
       type: String,

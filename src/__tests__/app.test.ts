@@ -1,14 +1,16 @@
 import request from 'supertest';
-import app from '../app';;
+import app from '../app';
 import {
   connectMemoryServer,
   cleanUpMemoryServer,
 } from '../database/memoryServer';
 
+// connect to Mongo Memory server before running tests
 beforeAll(async () => {
   await connectMemoryServer();
 });
 
+// clean up Memory Server after running all tests
 afterAll(async () => {
   await cleanUpMemoryServer();
 });
@@ -181,7 +183,6 @@ describe('get all resolved requests', () => {
         status: 'resolved',
       });
 
-    console.log(response);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('data');
     expect(response.body.data).toHaveProperty('link');
@@ -195,7 +196,7 @@ describe('create a comment status', () => {
   it('it should create support agent comment on a request', async () => {
     const data = {
       content: 'request has been attended to',
-      user: "support"
+      user: 'support',
     };
     // we need to verify the user commenting is the support agent, these are the data he needs to register
     const registerSupport = {
@@ -223,26 +224,23 @@ describe('create a comment status', () => {
   });
 });
 
-
-
 // test customer create comment
 describe('create comment', () => {
   it('it should create a customer comment on a request', async () => {
     const data = {
       content: 'request has been attended to',
-      user: "support"
+      user: 'support',
     };
     const response = await request(app)
       .post(`/api/v1/support/requests/comments/${requestId}`)
       .set('Authorization', `Bearer ${token}`)
-      .send(data)
+      .send(data);
 
     // requestId = response.body.data.newSupportRequest._id;
 
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('data');
-    expect(response.body.data).toHaveProperty('comment')
+    expect(response.body.data).toHaveProperty('comment');
     expect(response.body.data.comment).toHaveProperty('content');
   });
 });
-
