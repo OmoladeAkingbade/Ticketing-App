@@ -286,10 +286,16 @@ describe('delete user', () => {
     .post('/api/v1/users/signup')
     .send(registerAdmin);
     let adminToken = authResponse.body.token;
-    let userId = authResponse.body.id
+    let userId = authResponse.body.data._id;
+
+    console.log(authResponse.body)
+
     const response = await request(app)
       .delete(`/api/v1/users/delete/${userId}`)
       .set('Authorization', `Bearer ${adminToken}`);
+
+      // console.log(response)
+
       expect(response.status).toBe(204);
     console.log(response.status, '>>>>>>');
   });

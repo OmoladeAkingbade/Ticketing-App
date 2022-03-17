@@ -176,33 +176,37 @@ export const protectRoute = async (
  */
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const userToDeleteId = req.params.id;
+    const userToDeleteId = req.params.userId;
     const user = req.user;
-    // check for resolved requests
-    const userToDelete = await User.find({
-      user: 'customer',
-      id: userToDeleteId,
-    });
-    // return error message if there is no user 'customer' found
-    if (!userToDelete)
-      return res.status(404).json({
-        status: fail,
-        message: 'no customer user found',
-      });
-    // check if the logged in user is an admin,then he/she can delete a user
-    if (req.user?.user != 'admin') {
+
+    if (req.user?.user !== 'admin') {
       return res.status(400).json({
         status: 'fail',
         message: 'only an admin  can delete a user',
       });
     }
 
+    // check for resolved requests
+    // const userToDelete = await User.find({
+    //   // user: 'customer',
+    //   id: userToDeleteId,
+    // });
+    // // return error message if there is no user 'customer' found
+    // if (!userToDelete)
+    //   return res.status(404).json({
+    //     status: fail,
+    //     message: 'no customer user found',
+    //   });
+    // check if the logged in user is an admin,then he/she can delete a user
+
     /**
      * User.findByIdAndDelete(idOfUserTodelete)
      */
-    const deleteRequest = await User.findOneAndDelete({
-      user: user?._id,
-    });
+
+    console.log(userToDeleteId)
+
+    const deleteRequest = await User.findByIdAndDelete(userToDeleteId);
+
     return res.status(204).json({
       status: 'success',
       data: null,
