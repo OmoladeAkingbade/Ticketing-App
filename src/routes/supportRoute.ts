@@ -4,6 +4,7 @@ import { protectRoute } from '../controllers/authController';
 import { createComment } from '../controllers/commentController';
 import {
   createSupportRequest,
+  deleteResolvedRequest,
   getAllPreviousRequests,
   getOneRequest,
   getResolvedStatus,
@@ -29,6 +30,9 @@ router
   .put(protectRoute, updateRequestStatus);
 
 router.route('/get-resolved-requests').get(protectRoute, getResolvedStatus);
+router
+  .route('/get-resolved-request/:id')
+  .delete(protectRoute, deleteResolvedRequest);
 
 router.route('/requests/comments/:requestId').post(protectRoute, createComment);
 

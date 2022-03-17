@@ -165,3 +165,39 @@ export const protectRoute = async (
     });
   }
 };
+
+export const deleteUser = async(req: Request, res: Response) => {
+  try {
+    const user = req.user;
+    // check for resolved requests
+    const userToDelete = await User.find({
+      user: 'customer',
+    });
+    // return error message if there is no user 'customer' found
+    if (!userToDelete)
+      return res.status(404).json({
+        status: fail,
+        message: 'no customer user found',
+      });
+    // check if the logged in user is an admin,then he/she can delete a user
+    if (req.user?.user != 'admin') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'only an admin  can delete a user',
+      });
+    }
+    const deleteRequest = await User.findOneAndDelete({
+      user: user?._id,
+    });
+    return res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+    // }
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail to delete',
+      message: err,
+    });
+  }
+};

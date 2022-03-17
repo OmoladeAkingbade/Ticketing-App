@@ -53,7 +53,6 @@ export const createSupportRequest = async (req: Request, res: Response) => {
  * request: all requests that a user has created
  * }
  */
-
 export const getAllPreviousRequests = async (
   req: Request,
   res: Response,
@@ -95,17 +94,12 @@ export const getOneRequest = async (
   try {
     const { requestId } = req.params;
     const { _id } = req.user!;
-
-    console.log(req.user);
-
     const request = await supportRequest.findOne({ user: _id, _id: requestId });
-
     if (!request)
       return res.status(404).json({
         status: 'fail',
         message: 'request does not exist',
       });
-
     res.status(200).json({
       status: 'success',
       data: {
@@ -149,8 +143,7 @@ export const updateRequest = async (
         message: 'request not created by current user or request not found',
       });
     }
-
-    res.status(201).json({
+      res.status(201).json({
       status: 'success',
       data: {
         updateRequest,
@@ -192,7 +185,6 @@ export const updateRequestStatus = async (
         message: 'Request does not exist',
       });
     }
-
     // only a support agent is allowed to resolve and update request status.
     if (req.user?.user === 'customer') {
       return res.status(400).json({
@@ -208,7 +200,6 @@ export const updateRequestStatus = async (
         validators: true,
       }
     );
-
     res.status(201).json({
       status: 'success',
       data: {
@@ -232,7 +223,6 @@ export const updateRequestStatus = async (
  *  link: csv file that contains all resolved requests in the last 30 days
  * }
  */
-
 export const getResolvedStatus = async (
   req: Request,
   res: Response,
@@ -258,14 +248,11 @@ export const getResolvedStatus = async (
       });
 
     const fileName = `30-days-resolved-requests.csv`;
-
     // writestream to write file
     const file = fs.createWriteStream(`./public/${fileName}`);
-
     file.write(
       'statusId,title,description,status,userId,createdAt,statusUpdatedAt\n'
     );
-
     // write rows in the csv file
     resolvedRequests.forEach(function (v) {
       file.write(
@@ -276,10 +263,9 @@ export const getResolvedStatus = async (
 
     // get url of the server
     const url = req.protocol + '://' + req.get('host');
-
     res.status(200).json({
       status: 'success',
-      message: 'Resolved request file successcfully created',
+      message: 'Resolved request file successfully created',
       data: {
         link: `${url}/${fileName}`,
       },
@@ -287,6 +273,56 @@ export const getResolvedStatus = async (
   } catch (err) {
     res.status(404).json({
       status: 'fail',
+      message: err,
+    });
+  }
+};
+
+/**
+ *
+ * @param req
+ * @param res
+ * @param next
+ * @returns {
+ * deleteResolvedRequest: delete  a resolved request
+ * }
+ */
+export const deleteResolvedRequest = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const user = req.user;
+    // check for resolved requests
+    const resolvedRequest = await supportRequest.find({
+      status: 'resolved',
+    });
+    // return error message if there are no resolved requests found
+    if (!resolvedRequest)
+      return res.status(404).json({
+        status: fail,
+        message: 'No data found',
+      });
+    // check if the logged in user is an admin,then he/she can delete resolved request
+    if (req.user?.user != 'admin') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'only an admin  can delete resolved requests',
+      });
+    }
+    const deleteRequest = await supportRequest.findOneAndDelete({
+      requestId: req.params,
+      user: user?._id,
+    });
+    return res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+    // }
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail to delete',
       message: err,
     });
   }

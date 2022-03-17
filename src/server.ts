@@ -1,4 +1,3 @@
-
 import dotenv from 'dotenv';
 import { appendFile } from 'fs';
 import { connectMockDB, connectDB } from './database/database';

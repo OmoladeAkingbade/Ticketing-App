@@ -1,3 +1,7 @@
+/**
+ * summary - This is the test file. This file holds all the test coverage
+ */
+
 import request from 'supertest';
 import app from '../app';
 import {
@@ -17,6 +21,7 @@ afterAll(async () => {
 
 let token: string;
 let requestId: string;
+let userId: string;
 
 // test authentication(signup and login)
 describe('user authentication', () => {
@@ -237,10 +242,55 @@ describe('create comment', () => {
       .send(data);
 
     // requestId = response.body.data.newSupportRequest._id;
-
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('data');
     expect(response.body.data).toHaveProperty('comment');
     expect(response.body.data.comment).toHaveProperty('content');
+  });
+});
+
+// test delete resolved request
+describe('delete resolved request', () => {
+  it('it should delete a request that resolved', async () => {
+    //only an admin can delete request, admin signup
+    const registerAdmin = {
+      email: 'adminsupport@gmail.com',
+      password: 'adminpassword',
+      fullname: 'Admin Support',
+      user: 'admin',
+    };
+
+    const authResponse = await request(app)
+      .post('/api/v1/users/signup')
+      .send(registerAdmin);
+    // .set("Authorization", `Bearer ${token}`);
+    let adminToken = authResponse.body.token;
+    const response = await request(app)
+      .delete(`/api/v1/support/get-resolved-request/${requestId}`)
+      .set('Authorization', `Bearer ${adminToken}`);
+    expect(response.status).toBe(204);
+  });
+});
+
+// test delete user
+describe('delete user', () => {
+  it('it should delete a user', async () => {
+    //only an admin can delete a user, admin signup
+    const registerAdmin = {
+      email: 'adminsupport2@gmail.com',
+      password: 'adminpassword',
+      fullname: 'Admin Support',
+      user: 'admin',
+    };
+    const authResponse = await request(app)
+    .post('/api/v1/users/signup')
+    .send(registerAdmin);
+    let adminToken = authResponse.body.token;
+    let userId = authResponse.body.id
+    const response = await request(app)
+      .delete(`/api/v1/users/delete/${userId}`)
+      .set('Authorization', `Bearer ${adminToken}`);
+      expect(response.status).toBe(204);
+    console.log(response.status, '>>>>>>');
   });
 });
