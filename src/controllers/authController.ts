@@ -120,7 +120,7 @@ export const login = async (req: Request, res: Response) => {
 
 /**
  * we use jwt is used to create and verify tokens for users
- * when a new user is created, their password will also be hashed and stored
+ * when a new user is created, their password is hashed and stored
  * when an existing user signs in, his/her password is verified
  * if there's no token provided, send error message
  */
@@ -166,8 +166,18 @@ export const protectRoute = async (
   }
 };
 
+
+/**
+ * 
+ * @param req 
+ * @param res 
+ * @returns {
+ * data: null
+ * }
+ */
 export const deleteUser = async(req: Request, res: Response) => {
   try {
+    // idOfUserTodelete = req.params.id
     const user = req.user;
     // check for resolved requests
     const userToDelete = await User.find({
@@ -186,6 +196,10 @@ export const deleteUser = async(req: Request, res: Response) => {
         message: 'only an admin  can delete a user',
       });
     }
+
+    /**
+     * User.findByIdAndDelete(idOfUserTodelete)
+     */
     const deleteRequest = await User.findOneAndDelete({
       user: user?._id,
     });
