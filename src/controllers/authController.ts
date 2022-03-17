@@ -198,7 +198,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     }
 
     /**
-     * User.findByIdAndDelete(idOfUserTodelete)//
+     * User.findByIdAndDelete(idOfUserTodelete)
      */
     const deleteRequest = await User.findOneAndDelete({
       user: user?._id,
