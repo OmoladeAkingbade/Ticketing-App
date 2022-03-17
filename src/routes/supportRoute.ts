@@ -31,7 +31,7 @@ router
 
 router.route('/get-resolved-requests').get(protectRoute, getResolvedStatus);
 router
-  .route('/get-resolved-request/:id')
+  .route('/:id')
   .delete(protectRoute, deleteResolvedRequest);
 
 router.route('/requests/comments/:requestId').post(protectRoute, createComment);

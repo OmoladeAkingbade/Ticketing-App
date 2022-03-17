@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema<IUser>(
       required: [true, 'A user must have a password'],
       trim: true,
       select: false,
-      maxlength: [20, 'A password must have less or equal to 20 characters'],
+      // maxlength: [20, 'A password must have less or equal to 20 characters'],
       minlength: [
         10,
         'A password name must have more or equal to 10 characters',

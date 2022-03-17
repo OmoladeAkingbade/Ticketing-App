@@ -9,6 +9,8 @@ This App features _NodeJs_, _Express_, _Typescript_, and _MongoDB_.
 - [Included Tooling](#included-tooling)
 - [Installation](#installation)
 - [Commands](#commands)
+- [Database](#Database)
+- [Deployment](#Deployment)
 
 ## Overview
 
@@ -27,6 +29,7 @@ It also allows Support agent to find and process support requests, update reques
 - [TypeScript](https://www.typescriptlang.org/) - Type checking
 - [ESLint](https://eslint.org/) - Code linting
 - [Prettier](https://prettier.io/) - Code formatting
+- [Heroku](https://support-req-app.herokuapp.com/)-
 
 ## Installation
 
@@ -41,5 +44,18 @@ git clone https://github.com/OmoladeAkingbade/Ticketing-App.git
 
 - `yarn dev` - Starts the development server.
 - `yarn test` - Runs the unit tests.
-- `yarn compile:watch` - Compiles code and watch for file changes .
+- `yarn compile:watch` - Compiles code and watch for file changes.
 - `yarn prod` - Starts the production server.
+- `node dist/seed-data/seed.js` - creates seed data.
+
+## Database
+
+```Seed Data Files
+    comments.json
+    supportrequests.json
+    users.json
+```
+
+## Deployment
+
+- [Heroku Link](https://support-req-app.herokuapp.com/)

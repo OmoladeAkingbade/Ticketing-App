@@ -1,0 +1,47 @@
+[
+  {
+    "email": "adaezeone@gmail.com",
+    "password": "$2a$10$4yPiXmSLlhMP3MVgtmBir.1VnlTO1hH2M/bGeBW76hhN29UusH2Ze",
+    "fullname": "Eberechiii Adaeze"
+  },
+  {
+    "email": "adaezeone2@gmail.com",
+    "password": "$2a$10$PR5XGrB/n/h245FInFEjUuVnb/Q4nRjN8Ep5JT0/kd0oe0eXKapHm",
+    "fullname": "Eberechiii Ada"
+  },
+  {
+    "email": "adaezeone23@gmail.com",
+    "password": "$2a$10$P8WJnp2WNZQOojm9XrWWherO.2CCAeU5iaMaeO9mf0k6lNOiUi8F.",
+    "fullname": "Eberechiii Ada"
+  },
+  {
+    "email": "user1@gmail.com",
+    "user": "customer",
+    "password": "$2a$10$uJRE.SLl0gXOsQr3cQgiVOFnMLjbeMnpRl2TeKjIpJfuBYGuqmQmq",
+    "fullname": "user1 user"
+  },
+  {
+    "email": "user2@gmail.com",
+    "user": "customer",
+    "password": "$2a$10$MTppV4Yv3XMs5GytevIbzu.r5aK1ZIOeKICCoZAPWLTGKUdW5iTkO",
+    "fullname": "user1 user"
+  },
+  {
+    "email": "usersupport@gmail.com",
+    "user": "support",
+    "password": "$2a$10$Wr4ZhOszIevoXzefiRtGteURBFO6E1la7zVq0aXT.EAReRtHZP06G",
+    "fullname": "user1 user"
+  },
+  {
+    "email": "usersupport1@gmail.com",
+    "user": "support",
+    "password": "$2a$10$rEdGYUSbfvjsmfpd5XmVZ.62d.b8xq5RFzwp8p/SIuB9FL.wqnjj.",
+    "fullname": "user1 user"
+  },
+  {
+    "email": "adminsupport1@gmail.com",
+    "user": "admin",
+    "password": "$2a$10$Z6Hv9nfv6rMv1beNCbSBheYnRv1j2UHiivR8snyitj.NbGuBDpQ1u",
+    "fullname": "Admin user"
+  }
+]

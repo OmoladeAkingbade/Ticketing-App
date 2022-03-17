@@ -263,10 +263,12 @@ describe('delete resolved request', () => {
     const authResponse = await request(app)
       .post('/api/v1/users/signup')
       .send(registerAdmin);
-    // .set("Authorization", `Bearer ${token}`);
+
+    console.log(authResponse, ">>>>>>>>")
     let adminToken = authResponse.body.token;
+    let requestId = authResponse.body.data._id
     const response = await request(app)
-      .delete(`/api/v1/support/get-resolved-request/${requestId}`)
+      .delete(`/api/v1/support/${requestId}`)
       .set('Authorization', `Bearer ${adminToken}`);
     expect(response.status).toBe(204);
   });

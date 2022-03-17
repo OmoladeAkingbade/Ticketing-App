@@ -1,0 +1,143 @@
+[
+  {
+    "title": "Flight Ticket",
+    "description": "booked to maldives",
+    "customerCanComment": false,
+    "status": "resolved",
+    "user": "622e23f1f25382de6bf7ab1b",
+    "statusUpdatedAt": "2021-03-15T13:31:31.001Z"
+  },
+  {
+    "title": "Returning Ticket",
+    "description": "Kindly follow up , it's taking too long",
+    "customerCanComment": true,
+    "status": "resolved",
+    "user": "622e23f1f25382de6bf7ab1b",
+    "statusUpdatedAt": "2022-03-15T19:37:39.331Z"
+  },
+  {
+    "title": "Movie Ticket",
+    "description": "please change date on ticket to a week further",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "_id": "6230fc794b75373949ffd92e",
+    "title": "One Ticket",
+    "description": "No mail received",
+    "customerCanComment": false,
+    "status": "resolved",
+    "user": "622e23f1f25382de6bf7ab1b",
+    "statusUpdatedAt": "2022-03-15T21:04:03.762Z"
+  },
+  {
+    "title": "Two Ticket",
+    "description": "incorrect date on ticket",
+    "customerCanComment": false,
+    "status": "resolved",
+    "user": "622e23f1f25382de6bf7ab1b",
+    "statusUpdatedAt": "2022-03-15T21:05:28.409Z"
+  },
+  {
+    "title": "Three Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "resolved",
+    "user": "622e23f1f25382de6bf7ab1b",
+    "statusUpdatedAt": "2022-03-15T21:06:37.949Z"
+  },
+  {
+    "title": "Four Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "resolved",
+    "user": "622e23f1f25382de6bf7ab1b",
+    "statusUpdatedAt": "2022-03-15T21:07:01.809Z"
+  },
+  {
+    "title": "Five Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "resolved",
+    "user": "622e23f1f25382de6bf7ab1b",
+    "statusUpdatedAt": "2022-03-16T07:42:32.540Z"
+  },
+  {
+    "title": "Six Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Seven Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Eight Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Nine Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Ten Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Eleven Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Twelve Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Thirteen Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Fourteen Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "Fifteen Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  },
+  {
+    "title": "sixteen Ticket",
+    "description": "No date on ticket",
+    "customerCanComment": false,
+    "status": "pending",
+    "user": "622e23f1f25382de6bf7ab1b"
+  }
+]

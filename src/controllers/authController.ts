@@ -186,25 +186,6 @@ export const deleteUser = async (req: Request, res: Response) => {
       });
     }
 
-    // check for resolved requests
-    // const userToDelete = await User.find({
-    //   // user: 'customer',
-    //   id: userToDeleteId,
-    // });
-    // // return error message if there is no user 'customer' found
-    // if (!userToDelete)
-    //   return res.status(404).json({
-    //     status: fail,
-    //     message: 'no customer user found',
-    //   });
-    // check if the logged in user is an admin,then he/she can delete a user
-
-    /**
-     * User.findByIdAndDelete(idOfUserTodelete)
-     */
-
-    console.log(userToDeleteId)
-
     const deleteRequest = await User.findByIdAndDelete(userToDeleteId);
 
     return res.status(204).json({

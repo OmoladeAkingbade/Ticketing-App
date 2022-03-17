@@ -12,7 +12,8 @@
     "compile:watch": "yarn tsc -w",
     "prod": "NODE_ENV=production nodemon dist/server",
     "format": "prettier --write ./src",
-    "heroku-postbuild": "yarn compile"
+    "heroku-postbuild": "yarn compile",
+    "seed:data": "node dist/seed-data/seed.js"
   },
   "repository": "https://github.com/OmoladeAkingbade/Ticketing-App.git",
   "author": "OmoladeAkingbade <lademercy93@gmail.com>",

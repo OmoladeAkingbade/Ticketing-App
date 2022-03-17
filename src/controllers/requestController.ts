@@ -143,7 +143,7 @@ export const updateRequest = async (
         message: 'request not created by current user or request not found',
       });
     }
-      res.status(201).json({
+    res.status(201).json({
       status: 'success',
       data: {
         updateRequest,
@@ -295,26 +295,20 @@ export const deleteResolvedRequest = async (
   try {
     const user = req.user;
     // check for resolved requests
-    const resolvedRequest = await supportRequest.find({
-      status: 'resolved',
-    });
-    // return error message if there are no resolved requests found
-    if (!resolvedRequest)
-      return res.status(404).json({
-        status: fail,
-        message: 'No data found',
-      });
-    // check if the logged in user is an admin,then he/she can delete resolved request
+    const resolvedRequestId = req.params.id;
+
     if (req.user?.user != 'admin') {
       return res.status(400).json({
         status: 'fail',
         message: 'only an admin  can delete resolved requests',
       });
     }
-    const deleteRequest = await supportRequest.findOneAndDelete({
-      requestId: req.params,
-      user: user?._id,
-    });
+
+    console.log({ resolvedRequestId });
+
+    const deleteRequest = await supportRequest.findByIdAndDelete(
+      resolvedRequestId
+    );
     return res.status(204).json({
       status: 'success',
       data: null,
