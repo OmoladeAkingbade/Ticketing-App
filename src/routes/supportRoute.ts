@@ -28,7 +28,6 @@ router
   .route('/requests/status/:requestId')
   .put(protectRoute, updateRequestStatus);
 
-
 router.route('/get-resolved-requests').get(protectRoute, getResolvedStatus);
 
 router.route('/requests/comments/:requestId').post(protectRoute, createComment);

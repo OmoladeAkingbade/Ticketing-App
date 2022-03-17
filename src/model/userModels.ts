@@ -1,3 +1,8 @@
+/**
+ * summary - This is the user model file.
+ * The file contains the user schema that defines the structure and contents of the user data.
+ */
+
 import mongoose from 'mongoose';
 import { IUser } from '../utils/interface';
 import validator from 'validator';

@@ -1,7 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { connectMockDB, connectDB } from './database/database';
 import dotenv from 'dotenv';
 import userRouter from './routes/userRoute';
 import supportRouter from './routes/supportRoute';

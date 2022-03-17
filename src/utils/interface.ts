@@ -13,12 +13,11 @@ export interface ISupportRequest {
   description: string;
   customerCanComment: boolean;
   statusUpdatedAt: Date;
-  createdAt: Date
+  createdAt: Date;
   status: string | undefined;
   user: string | undefined;
   timestamps: string;
 }
-
 
 export interface IComment {
   content: string;

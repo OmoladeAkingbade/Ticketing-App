@@ -1,6 +1,6 @@
 /**
  * summary - This is the comment model file.
- * The file contains the comment schema that defines the the structure and contents of our comment data.
+ * The file contains the comment schema that defines the structure and contents of our comment data.
  */
 
 import mongoose from 'mongoose';

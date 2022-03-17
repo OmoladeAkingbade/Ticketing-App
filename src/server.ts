@@ -1,4 +1,4 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+
 import dotenv from 'dotenv';
 import { appendFile } from 'fs';
 import { connectMockDB, connectDB } from './database/database';

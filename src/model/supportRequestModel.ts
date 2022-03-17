@@ -1,6 +1,6 @@
 /**
- * summary - This is the support reuest model file.
- * The file contains the support reuest schema that defines the structure and contents of the support request data.
+ * summary - This is the support request model file.
+ * The file contains the support request schema that defines the structure and contents of the support request data.
  */
 
 import mongoose from 'mongoose';

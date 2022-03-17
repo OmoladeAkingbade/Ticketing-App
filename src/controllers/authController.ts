@@ -1,6 +1,6 @@
-  /**
-  * summary - This is an authentication controller. This file is used to register, login and verify     users. It also has the protectRoute function to verify a user before they can access certain routes
-  */
+/**
+ * summary - This is an authentication controller. This file is used to register, login and verify     users. It also has the protectRoute function to verify a user before they can access certain routes
+ */
 
 import { Request, Response, NextFunction } from 'express';
 import User from '../model/userModels';
@@ -13,11 +13,14 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-  
-// @ts-check
-  /**
-  @param {email} email - the user's email used to generate token
-  */
+
+/**
+ *
+ * @param email
+ * @returns {
+ * data : new user data
+ * }
+ */
 const generateToken = (email: string) => {
   const token = jwt.sign({ email }, process.env.JWT_SECRET as string, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -47,7 +50,7 @@ export const signup = async (
       status: 'success',
       data: newUser,
       token: generateToken(newUser.email),
- });
+    });
   } catch (err: any) {
     // check if the error type is aduplicate error i.e if the user already exist
     if (err.code && err.code === 11000) {
@@ -65,7 +68,14 @@ export const signup = async (
   }
 };
 
-// user login
+/**
+ *
+ * @param req
+ * @param res
+ * @returns {
+ * data : logged in user data
+ * }
+ */
 export const login = async (req: Request, res: Response) => {
   try {
     const isValid = validateUserLogin.validate(req.body);
@@ -82,8 +92,6 @@ export const login = async (req: Request, res: Response) => {
      * if user does not exist, send error message
      * else, if the user exist, login the user
      */
-
-
     const user = await User.findOne({ email: req.body.email }).select([
       '+password',
       '-fullname',
@@ -110,13 +118,12 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
- /**
-     * we use jwt is used to create and verify tokens for users
-     * when a new user is created, their password will also be hashed and stored
-     * when an existing user signs in, his/her password is verified
-     * if there's no token provided, send error message
+/**
+ * we use jwt is used to create and verify tokens for users
+ * when a new user is created, their password will also be hashed and stored
+ * when an existing user signs in, his/her password is verified
+ * if there's no token provided, send error message
  */
-
 export const protectRoute = async (
   req: Request,
   res: Response,

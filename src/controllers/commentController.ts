@@ -1,15 +1,21 @@
 /**
-  * summary - This is the comment controller. This file has handlers to allow user (cutomer and support agent to create comment on support requests)
-  */
-
+ * summary - This is the comment controller. This file has handlers to allow user (customer and support agent to create comment on support requests)
+ */
 
 import { Request, Response, NextFunction } from 'express';
 import Comments from '../model/commentModel';
 import request from '../model/supportRequestModel';
 import { validateComment } from '../validations/validation';
 
+/**
+ *
+ * @param req
+ * @param res
+ * @returns {
+ * data : a comment created by support agent
+ * }
+ */
 
-// the handler to allow a support agent create comment on a request
 export const createComment = async (req: Request, res: Response) => {
   try {
     // validates the request coming from the request body, if there is an error, returns error message to user
@@ -47,8 +53,7 @@ export const createComment = async (req: Request, res: Response) => {
       });
     }
 
-    // the handler to allow a support agent create comment on a request
-    // if customerCanComment is true, that is, a support agent has commented on the request, then a customer can create comment, else it returns an error message to the user
+    // if customerCanComment is true, a customer can create comment, else return an error message
     const customerCanComment = supportRequest.customerCanComment;
     if (customerCanComment === true) {
       const comment = await Comments.create({ ...req.body, user: user?._id });
@@ -69,4 +74,3 @@ export const createComment = async (req: Request, res: Response) => {
     res.status(400).send('Not Found');
   }
 };
-

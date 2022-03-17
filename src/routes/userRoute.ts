@@ -1,15 +1,10 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
-import { signup, login, protectRoute } from '../controllers/authController';
-import { createSupportRequest } from '../controllers/requestController';
+import express from 'express';
+import { signup, login} from '../controllers/authController';
 
 const router = express.Router();
 
-router
-    .route('/signup')
-    .post(signup);
+router.route('/signup').post(signup);
 
-router
-    .route('/login')
-    .post(login);
+router.route('/login').post(login);
 
 export default router;
