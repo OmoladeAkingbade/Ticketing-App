@@ -1,5 +1,5 @@
 {
-  "name": "TicketingApp",
+  "name": "ticketingapp",
   "version": "1.0.0",
   "description": "customer support ticketing system.",
   "main": "app.ts",
