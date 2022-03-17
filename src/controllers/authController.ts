@@ -166,22 +166,22 @@ export const protectRoute = async (
   }
 };
 
-
 /**
- * 
- * @param req 
- * @param res 
+ *
+ * @param req
+ * @param res
  * @returns {
  * data: null
  * }
  */
-export const deleteUser = async(req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
   try {
-    // idOfUserTodelete = req.params.id
+    const userToDeleteId = req.params.id;
     const user = req.user;
     // check for resolved requests
     const userToDelete = await User.find({
       user: 'customer',
+      id: userToDeleteId,
     });
     // return error message if there is no user 'customer' found
     if (!userToDelete)
@@ -198,7 +198,7 @@ export const deleteUser = async(req: Request, res: Response) => {
     }
 
     /**
-     * User.findByIdAndDelete(idOfUserTodelete)
+     * User.findByIdAndDelete(idOfUserTodelete)//
      */
     const deleteRequest = await User.findOneAndDelete({
       user: user?._id,
